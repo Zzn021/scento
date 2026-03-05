@@ -49,8 +49,10 @@ resource "aws_lambda_function" "this" {
   runtime       = "nodejs20.x"
   handler       = "dist/index.handler"
 
-  filename         = var.zip_path
-  source_code_hash = filebase64sha256(var.zip_path)
+  s3_bucket     = var.artifact_bucket
+  s3_key        = var.artifact_key
+
+  source_code_hash = var.artifact_hash
 
   timeout     = 900
   memory_size = 1024

@@ -68,7 +68,10 @@ module "ingestion_lambda" {
   source = "../../modules/lambda_ingestion"
 
   function_name = "${local.name}-ingestion"
-  zip_path       = "${path.module}/artifacts/ingestion.zip"
+
+  artifact_bucket = aws_s3_bucket.lambda_artifacts.bucket
+  artifact_key    = aws_s3_object.ingestion_zip.key
+  artifact_hash   = filebase64sha256("${path.module}/artifacts/ingestion.zip")
 
   catalog_table_name = module.dynamodb.catalog_table_name
   catalog_table_arn  = data.aws_dynamodb_table.catalog.arn
