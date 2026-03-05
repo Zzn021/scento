@@ -1,0 +1,23 @@
+{
+  "name": "@scento/ingestion",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "run:local": "node dist/local.js",
+    "test": "npm run build && node -r dotenv/config --test dist/tests/*.js",
+    "zip": "rm -rf package && mkdir -p package && cp -r dist package/ && cp -r node_modules package/ && cd package && zip -r ../ingestion.zip ."
+  },
+  "dependencies": {
+    "@aws-sdk/client-dynamodb": "^3.600.0",
+    "@aws-sdk/client-s3": "^3.600.0",
+    "@aws-sdk/lib-dynamodb": "^3.600.0",
+    "csv-parse": "^5.5.6",
+    "dotenv": "^17.3.1"
+  },
+  "devDependencies": {
+    "@types/node": "^25.3.3",
+    "typescript": "^5.5.0"
+  }
+}

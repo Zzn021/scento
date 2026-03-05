@@ -10,3 +10,25 @@
 **/*.tfstate
 **/*.tfstate.*
 crash.log
+
+#------------
+# Services
+#------------
+
+# Node
+node_modules/
+dist/
+*.log
+
+# Env
+.env
+.env.*
+
+# Artifacts
+*.zip
+
+# Large local data
+*.csv
+data/raw/
+data/seed/
+
