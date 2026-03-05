@@ -56,6 +56,29 @@ module "cognito" {
   domain_prefix = "${local.name}-${var.name_suffix}"
 }
 
+data "aws_dynamodb_table" "catalog" {
+  name = module.dynamodb.catalog_table_name
+}
+
+data "aws_s3_bucket" "data" {
+  bucket = module.s3.data_bucket_name
+}
+
+module "ingestion_lambda" {
+  source = "../../modules/lambda_ingestion"
+
+  function_name = "${local.name}-ingestion"
+  zip_path       = "${path.module}/artifacts/ingestion.zip"
+
+  catalog_table_name = module.dynamodb.catalog_table_name
+  catalog_table_arn  = data.aws_dynamodb_table.catalog.arn
+
+  data_bucket_name = module.s3.data_bucket_name
+  data_bucket_arn  = data.aws_s3_bucket.data.arn
+
+  tags = local.tags
+}
+
 # module "iam" {
 #   source = "../../modules/iam"
 
