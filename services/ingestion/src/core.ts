@@ -146,6 +146,5 @@ export async function parseAndNormalizeCsvStream(stream: Readable): Promise<Pars
 
   stream.pipe(parser);
   await done;
-
   return { items, processed, inserted, failed };
 }

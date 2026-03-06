@@ -32,9 +32,15 @@ dist/
 
 # Artifacts
 *.zip
+package
 
 # Large local data
 *.csv
 data/raw/
 data/seed/
 
+#------------
+# AWS
+#------------
+
+response.json

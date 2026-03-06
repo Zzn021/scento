@@ -4,6 +4,10 @@ import { DynamoDBDocumentClient } from "@aws-sdk/lib-dynamodb";
 import { makeHandler } from "./handler.js";
 
 const s3 = new S3Client({});
-const ddb = DynamoDBDocumentClient.from(new DynamoDBClient({}));
+const ddb = DynamoDBDocumentClient.from(new DynamoDBClient({}), {
+  marshallOptions: {
+    removeUndefinedValues: true
+  }
+});
 
 export const handler = makeHandler({ s3, ddb });

@@ -47,7 +47,7 @@ resource "aws_lambda_function" "this" {
   function_name = var.function_name
   role          = aws_iam_role.this.arn
   runtime       = "nodejs20.x"
-  handler       = "dist/index.handler"
+  handler       = "dist/src/index.handler"
 
   s3_bucket     = var.artifact_bucket
   s3_key        = var.artifact_key
